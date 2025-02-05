@@ -1,113 +1,70 @@
 # Travel App Frontend
 
-A React Native mobile application for travelers to connect, share experiences, and join communities.
+Bu proje, gezginlerin deneyimlerini paylaşabilecekleri, topluluklar oluşturabilecekleri ve diğer gezginlerle etkileşime geçebilecekleri bir sosyal platform uygulamasıdır.
 
-## Features Implemented
+## Özellikler
 
-### Navigation Bar
-- Home
-- Search
-- Communities
-- Notifications
-- Direct Messages
-- Profile
+### Ana Sayfa (Feed)
+- Kullanıcı ve topluluk paylaşımlarının karışık gösterildiği ana feed
+- Her post için:
+  - Kullanıcı/topluluk profil fotoğrafı ve bilgileri
+  - Paylaşım içeriği ve fotoğrafı
+  - Beğeni ve yorum sayıları
+  - Beğenme, yorum yapma ve paylaşma butonları
+  - 3 nokta menüsü (Post seçenekleri)
+    - Post Kaydetme
+    - Post Şikayet Etme
+    - Paylaşma
+    
+### Topluluklar
+- Üye olunan topluluklar listesi
+- Önerilen topluluklar
+- Her topluluk kartında:
+  - Topluluk fotoğrafı
+  - Topluluk adı ve açıklaması
+  - Üye sayısı
+  - Katılma/Ayrılma butonu
+  - Görüntüleme butonu
 
-### Profile Page
-1. User Information Section
-   - Profile picture
-   - Background image
-   - Username
-   - Bio
-   - Location
-   - Interests (tags)
-   - Travel style
-   - Social media links (Instagram, Twitter)
+### Mesajlaşma
+- Direkt mesajlar
+- Grup sohbetleri
+- Her sohbet için:
+  - Profil fotoğrafı
+  - Kullanıcı/grup adı
+  - Son mesaj
+  - Son mesaj zamanı
+  - Okunmamış mesaj sayısı
+- Yeni mesaj oluşturma butonu
 
-2. Interaction Features
-   - Add/Remove friend
-   - Cancel friend request
-   - Send message
-   - Block/Unblock user
-   - Report user
-   - Profile options menu (three dots menu)
+### Profil
+- Kullanıcı bilgileri
+- Profil ve kapak fotoğrafı
+- Paylaşımlar
+- Takipçi/Takip edilen bilgileri
 
-3. Posts Section
-   - Post images
-   - Post content
-   - Like/Unlike functionality
-   - Comments view
-   - Like and comment counters
-   - Timestamp
+## Teknolojiler
+- React Native
+- Expo Router
+- TypeScript
+- React Native'in temel bileşenleri (View, Text, Image, TouchableOpacity, vb.)
+- Expo Vector Icons
 
-4. Privacy Features
-   - Block user functionality
-   - Content hiding for blocked users
-   - Interaction restrictions
+## Tasarım Özellikleri
+- Modern ve temiz arayüz
+- Platform uyumlu bileşenler (iOS/Android)
+- Responsive tasarım
+- Gölgeler ve yuvarlatılmış köşeler
+- Platform-spesifik etkileşimler (iOS ActionSheet, Android Alert Dialog)
 
-### Communities Page
-1. Your Communities Section
-   - Community cards with:
-     - Community name
-     - Member count
-     - Description
-     - View Community button
+## Kurulum
+(Kurulum adımları eklenecek)
 
-2. Recommended Communities Section
-   - Similar card design with:
-     - Community name
-     - Member count
-     - Description
-     - View Community button
-     - Join Community button
+## Geliştirme
+(Geliştirme notları eklenecek)
 
-3. Community Features
-   - Join community functionality
-   - Member count display
-   - Community description
-   - Basic navigation setup
-
-## Database Schema
-The app follows a structured database schema for:
-- Users (profile information, friends, blocks)
-- Posts (content, likes, comments)
-- Communities (members, descriptions)
-
-## Styling
-- Modern and clean UI design
-- Consistent color scheme
-- Shadow effects for cards
-- Responsive buttons
-- Status indicators
-- Modal windows for additional features
-
-## Next Steps
-1. Implement remaining navigation pages:
-   - Home
-   - Search
-   - Notifications
-   - Direct Messages
-
-2. Add features to Communities:
-   - Community detail page
-   - Post creation in communities
-   - Member management
-   - Community settings
-
-3. Enhance Profile:
-   - Post creation
-   - Photo upload
-   - Profile editing
-   - Advanced privacy settings
-
-4. Add Authentication:
-   - Login
-   - Registration
-   - Password recovery
-
-5. Implement Real-time Features:
-   - Chat
-   - Notifications
-   - Post updates
+## Katkıda Bulunma
+(Katkıda bulunma rehberi eklenecek)
 
 # Welcome to your Expo app 👋
 

@@ -4,12 +4,9 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  Image,
-  TouchableOpacity,
-  Alert,
 } from "react-native";
 import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import CommunityCard from "./components/CommunityCard";
 
 interface Community {
   _id: string;
@@ -88,49 +85,34 @@ export default function Communities() {
     }
   };
 
-  const renderCommunityCard = (community: Community) => (
-    <View key={community._id} style={styles.communityCard}>
-      <Image source={{ uri: community.image }} style={styles.communityImage} />
-      <View style={styles.communityInfo}>
-        <Text style={styles.communityName}>{community.name}</Text>
-        <Text style={styles.communityDescription} numberOfLines={2}>
-          {community.description}
-        </Text>
-        <Text style={styles.memberCount}>{community.memberCount} üye</Text>
-      </View>
-      <View style={styles.actionButtons}>
-        <TouchableOpacity
-          style={styles.viewButton}
-          onPress={() => router.push(`/community/${community._id}`)}
-        >
-          <Text style={styles.viewButtonText}>Görüntüle</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.joinButton, community.isMember && styles.leaveButton]}
-          onPress={() =>
-            community.isMember
-              ? handleLeaveCommunity(community._id)
-              : handleJoinCommunity(community._id)
-          }
-        >
-          <Text style={styles.joinButtonText}>
-            {community.isMember ? "Ayrıl" : "Katıl"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+  const handleViewCommunity = (communityId: string) => {
+    router.push(`/community/${communityId}`);
+  };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Üye Olduğun Topluluklar</Text>
-        {joinedCommunities.map(renderCommunityCard)}
+        {joinedCommunities.map((community) => (
+          <CommunityCard
+            key={community._id}
+            community={community}
+            onView={handleViewCommunity}
+            onJoinLeave={handleLeaveCommunity}
+          />
+        ))}
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Önerilen Topluluklar</Text>
-        {suggestedCommunities.map(renderCommunityCard)}
+        {suggestedCommunities.map((community) => (
+          <CommunityCard
+            key={community._id}
+            community={community}
+            onView={handleViewCommunity}
+            onJoinLeave={handleJoinCommunity}
+          />
+        ))}
       </View>
     </ScrollView>
   );
@@ -139,7 +121,7 @@ export default function Communities() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   section: {
     padding: 16,
@@ -149,70 +131,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
     color: "#333",
-  },
-  communityCard: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  communityImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-  },
-  communityInfo: {
-    flex: 1,
-    marginLeft: 12,
-    justifyContent: "center",
-  },
-  communityName: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  communityDescription: {
-    fontSize: 14,
-    color: "#666",
-    marginTop: 4,
-  },
-  memberCount: {
-    fontSize: 12,
-    color: "#888",
-    marginTop: 4,
-  },
-  actionButtons: {
-    justifyContent: "space-between",
-    paddingLeft: 8,
-  },
-  viewButton: {
-    backgroundColor: "#f0f0f0",
-    padding: 8,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  viewButtonText: {
-    color: "#333",
-    fontSize: 12,
-    textAlign: "center",
-  },
-  joinButton: {
-    backgroundColor: "#007AFF",
-    padding: 8,
-    borderRadius: 8,
-  },
-  leaveButton: {
-    backgroundColor: "#FF3B30",
-  },
-  joinButtonText: {
-    color: "#fff",
-    fontSize: 12,
-    textAlign: "center",
   },
 }); 

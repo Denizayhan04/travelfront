@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ChatItem from './components/ChatItem';
 
 interface Message {
   id: string;
@@ -112,52 +113,10 @@ export default function Messages() {
   const [chats, setChats] = useState<ChatPreview[]>(mockChats);
   const [groupChats, setGroupChats] = useState<GroupChat[]>(mockGroupChats);
 
-  const renderChatItem = ({ item }: { item: ChatPreview }) => (
-    <TouchableOpacity style={styles.chatItem}>
-      <Image source={{ uri: item.profilePicture }} style={styles.avatar} />
-      <View style={styles.chatInfo}>
-        <View style={styles.chatHeader}>
-          <Text style={styles.username}>{item.username}</Text>
-          <Text style={styles.timeText}>{item.lastMessageTime}</Text>
-        </View>
-        <View style={styles.lastMessageContainer}>
-          <Text style={styles.lastMessage} numberOfLines={1}>
-            {item.lastMessage}
-          </Text>
-          {item.unreadCount > 0 && (
-            <View style={styles.unreadBadge}>
-              <Text style={styles.unreadCount}>{item.unreadCount}</Text>
-            </View>
-          )}
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-
-  const renderGroupChatItem = ({ item }: { item: GroupChat }) => (
-    <TouchableOpacity style={styles.chatItem}>
-      <Image source={{ uri: item.photo }} style={styles.avatar} />
-      <View style={styles.chatInfo}>
-        <View style={styles.chatHeader}>
-          <View style={styles.groupNameContainer}>
-            <Text style={styles.username}>{item.name}</Text>
-            <Text style={styles.memberCount}>{item.members.length} members</Text>
-          </View>
-          <Text style={styles.timeText}>{item.lastMessageTime}</Text>
-        </View>
-        <View style={styles.lastMessageContainer}>
-          <Text style={styles.lastMessage} numberOfLines={1}>
-            {item.lastMessage}
-          </Text>
-          {item.unreadCount > 0 && (
-            <View style={styles.unreadBadge}>
-              <Text style={styles.unreadCount}>{item.unreadCount}</Text>
-            </View>
-          )}
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
+  const handleChatPress = (chatId: string) => {
+    // TODO: Navigate to chat detail
+    console.log('Navigate to chat:', chatId);
+  };
 
   return (
     <View style={styles.container}>
@@ -196,14 +155,33 @@ export default function Messages() {
       {activeTab === 'direct' ? (
         <FlatList
           data={chats}
-          renderItem={renderChatItem}
+          renderItem={({ item }) => (
+            <ChatItem
+              chat={item}
+              onPress={() => handleChatPress(item.userId)}
+            />
+          )}
           keyExtractor={item => item.userId}
           style={styles.chatList}
         />
       ) : (
         <FlatList
           data={groupChats}
-          renderItem={renderGroupChatItem}
+          renderItem={({ item }) => (
+            <ChatItem
+              chat={{
+                userId: item.id,
+                username: item.name,
+                profilePicture: item.photo,
+                lastMessage: item.lastMessage,
+                lastMessageTime: item.lastMessageTime,
+                unreadCount: item.unreadCount,
+                isGroup: true,
+                memberCount: item.members.length,
+              }}
+              onPress={() => handleChatPress(item.id)}
+            />
+          )}
           keyExtractor={item => item.id}
           style={styles.chatList}
         />
@@ -254,7 +232,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 2,
-    borderBottomColor: '#007AFF',
+    borderBottomColor: '#2667f2',
   },
   tabText: {
     fontSize: 14,
@@ -262,76 +240,11 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   activeTabText: {
-    color: '#007AFF',
+    color: '#2667f2',
     fontWeight: '600',
   },
   chatList: {
     flex: 1,
-  },
-  chatItem: {
-    flexDirection: 'row',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 12,
-  },
-  chatInfo: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  chatHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 4,
-  },
-  groupNameContainer: {
-    flex: 1,
-    marginRight: 8,
-  },
-  username: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  memberCount: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 2,
-  },
-  timeText: {
-    fontSize: 12,
-    color: '#999',
-  },
-  lastMessageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  lastMessage: {
-    flex: 1,
-    fontSize: 14,
-    color: '#666',
-    marginRight: 8,
-  },
-  unreadBadge: {
-    backgroundColor: '#007AFF',
-    borderRadius: 10,
-    minWidth: 20,
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 6,
-  },
-  unreadCount: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '600',
   },
   newMessageButton: {
     position: 'absolute',
@@ -340,7 +253,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#2667f2',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
