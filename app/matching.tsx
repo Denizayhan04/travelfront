@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function Profile() {
+export default function Matching() {
   return (
     <View style={styles.container}>
-      <Text>Profile</Text>
+      <Text>Matching</Text>
     </View>
   );
 }

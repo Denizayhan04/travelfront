@@ -1,75 +1,77 @@
 import { Tabs } from "expo-router";
+import { SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function TabsLayout() {
+export default function Layout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "#2667f2",
-        tabBarInactiveTintColor: "gray",
-        tabBarStyle: {
-          backgroundColor: '#fff',
-        },
-        headerStyle: {
-          backgroundColor: '#fff',
-        },
-        headerTintColor: '#2667f2',
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: '#1a2f5a',
+            borderTopWidth: 0,
+            height: 60,
+            paddingVertical: 10,
+            paddingTop: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          tabBarActiveTintColor: '#fff',
+          tabBarInactiveTintColor: '#8e9baf',
+          tabBarShowLabel: false,
+          tabBarIconStyle: {
+            width: 32,
+            height: 32,
+          }
         }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: "Search",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="search" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="communities"
-        options={{
-          title: "Communities",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="notifications"
-        options={{
-          title: "Notifications",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="notifications" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="messages"
-        options={{
-          title: "Messages",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubbles" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen 
+          name="index"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? "home" : "home-outline"} size={28} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen 
+          name="matching"
+          options={{
+            title: "Matching",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? "swap-horizontal" : "swap-horizontal-outline"} size={28} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen 
+          name="search"
+          options={{
+            title: "Search",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? "search" : "search-outline"} size={28} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen 
+          name="communities"
+          options={{
+            title: "Communities",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? "people" : "people-outline"} size={28} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen 
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? "person" : "person-outline"} size={28} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
+    </SafeAreaView>
   );
 } 
